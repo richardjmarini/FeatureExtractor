@@ -7,41 +7,10 @@ from inspect import currentframe
 from nltk import word_tokenize, pos_tag
 from math import log
 
-class Token(object):
-   
-   def __init__(self, word, pos= None):
 
-      self.word= word 
-      self.pos= pos
-      self.features= [pos]
-      self.length= len(word)
-
-   def add_feature(self, feature):
-      if feature not in self.features:
-         self.features.append(feature)
-
-   def remove_feature(self, feature):
-      if feature in self.features:
-         self.features.pop(feature)
-
-class Feature(object):
-
-   handlers= []
-
-   def __init__(self, feature):
-      self.feature= feature
-
-   def __call__(self, fn):
+from featurebase import Feature, Token
       
-      def decorated(cls, token):
-         if fn(cls, token) == True:
-            token.add_feature(self.feature)
-
-      decorated.feature= self.feature
-      self.handlers.append(decorated)
-      return decorated
-      
-class FeatureClassifier(object):
+class AddressClassifier(object):
 
    def __init__(self):
       self.handlers= {}
@@ -179,7 +148,7 @@ class FeatureClassifier(object):
 
       return token.features
 
-class Address(FeatureClassifier):
+class Address(AddressClassifier):
 
    def __init__(self, text):
 
