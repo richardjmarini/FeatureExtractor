@@ -1,19 +1,24 @@
 #!/usr/bin//env python
 
 from optparse import OptionParser, make_option
-from sys import stdin, argv
+from sys import stdin, stdout, argv
+from os import path
 from re import match, sub
 from itertools import izip, chain
 from inspect import currentframe
 from nltk import word_tokenize, pos_tag
 from math import log
+from pprint import pprint
+from json import dumps
 
 
-from featurebase import Feature, Token
-      
-class AddressClassifier(object):
+from featurebase import Feature, Token, FeatureClassifier
+
+class AddressClassifier(FeatureClassifier):
 
    def __init__(self):
+   
+      super(AddressClassifier, self).__init__()
       self.handlers= {}
 
    @Feature("INITCAP")
@@ -126,63 +131,51 @@ class AddressClassifier(object):
       if len(sub("[^0-9]", "", token.word)) in (5, 9):
          return True
 
-   def index(self, tokens):
+class Trainer(AddressClassifier):
 
-      features= [handler.feature for handler in Feature.handlers]
-      total_features= float(len(features))
-      token_features= list(chain(*[token.features for token in tokens]))
-      self.probability_matrix= dict([(feature, token_features.count(feature) / total_features) for feature in features])
+   default_classification= ["OTHER"]
 
-      print "Probability Matrix:", self.probability_matrix
+   def __init__(self, text, output= stdout):
 
-      self.entropy= sum([probability * log(probability, 2) for probability in self.probability_matrix.values() if probability > 0])
- 
-
-   def probability(self, feature):
-
-      return self.probability_matrix.get(feature, 0)
-
-   def classify(self, token):
-
-      for handler in Feature.handlers:
-         handler(self, token)
-
-      return token.features
-
-class Address(AddressClassifier):
-
-   def __init__(self, text):
-
-      super(Address, self).__init__()
+      super(Trainer, self).__init__()
 
       self.text= text
-      self.tokens= [Token(*word) for word in pos_tag(word_tokenize(self.text))]
-      map(self.classify, self.tokens)
+      self.output= output
+      self.tokens= [Token(*word) for word in map(lambda word: list(word) + self.default_classification, pos_tag(word_tokenize(self.text)))]
+      map(self.add_features, self.tokens)
 
-      print "Tokens:", [(token.word, token.length, token.features) for token in self.tokens]
+      #print "Tokens:"
+      #pprint([(token.word, token.length, token.features) for token in self.tokens])
 
       self.index(self.tokens)
 
-   def parse(self):
-      pass
+   def save(self):
+
+      self.output.write(dumps([(token.word, token.features, token.classification) for token in trainer.tokens]))
+      self.output.flush()
+
 
 def parse_args(argv):
 
    optParser= OptionParser()
 
    [optParser.add_option(opt) for opt in [
-      make_option("-f", "--file", default= stdin, help= "input file"),
+      make_option("-i", "--input", default= stdin, help= "input file"),
+      make_option("-o", "--output", default= stdout, help= "output file")
    ]]
 
    optParser.set_usage("%prog --query")
 
    opts, args= optParser.parse_args()
-   if opts.file == stdin:
-      setattr(opts, "file", stdin.read())
+   if opts.input == stdin:
+      setattr(opts, "input", stdin.read())
    else:
-      fh= open(opts.file, "r")
-      setattr(opts, "file", fh.read())
+      fh= open(opts.input, "r")
+      setattr(opts, "input", fh.read())
       fh.close()
+
+   if opts.output != stdout:
+      setattr(opts, "output", open(opts.output, "w"))
       
    return opts
 
@@ -191,6 +184,5 @@ if __name__ == '__main__':
 
    opts= parse_args(argv)
 
-   address= Address(opts.file)
-   address.parse()
-  
+   trainer= Trainer(opts.input, opts.output)
+   trainer.save()
