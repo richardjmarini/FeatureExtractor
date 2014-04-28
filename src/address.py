@@ -149,7 +149,7 @@ class Trainer(AddressClassifier):
 
       self.index(self.tokens)
 
-   def save(self):
+   def genereate(self):
 
       self.output.write(dumps([(token.word, token.features, token.classification) for token in trainer.tokens]))
       self.output.flush()
@@ -185,4 +185,4 @@ if __name__ == '__main__':
    opts= parse_args(argv)
 
    trainer= Trainer(opts.input, opts.output)
-   trainer.save()
+   trainer.genereate()
