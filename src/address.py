@@ -149,7 +149,7 @@ class Trainer(AddressClassifier):
 
       self.index(self.tokens)
 
-   def genereate(self):
+   def generate(self):
 
       self.output.write(dumps([(token.word, token.features, token.classification) for token in trainer.tokens]))
       self.output.flush()
@@ -161,7 +161,8 @@ def parse_args(argv):
 
    [optParser.add_option(opt) for opt in [
       make_option("-i", "--input", default= stdin, help= "input file"),
-      make_option("-o", "--output", default= stdout, help= "output file")
+      make_option("-o", "--output", default= stdout, help= "output file"),
+      make_option("-g", "--generate", action= "store_true", default= False, help= "generate training document"),
    ]]
 
    optParser.set_usage("%prog --query")
@@ -177,6 +178,7 @@ def parse_args(argv):
    if opts.output != stdout:
       setattr(opts, "output", open(opts.output, "w"))
       
+   print ">>>>>>>>>>>", opts.generate
    return opts
 
 
@@ -185,4 +187,6 @@ if __name__ == '__main__':
    opts= parse_args(argv)
 
    trainer= Trainer(opts.input, opts.output)
-   trainer.genereate()
+
+   if opts.generate:
+      trainer.generate()
