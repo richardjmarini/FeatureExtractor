@@ -1,6 +1,7 @@
 #!/usr/bin//env python
 
-from sys import stdin
+from optparse import OptionParser, make_option
+from sys import stdin, argv
 from re import match, sub
 from itertools import izip, chain
 from inspect import currentframe
@@ -164,12 +165,32 @@ class Address(AddressClassifier):
 
    def parse(self):
       pass
- 
+
+def parse_args(argv):
+
+   optParser= OptionParser()
+
+   [optParser.add_option(opt) for opt in [
+      make_option("-f", "--file", default= stdin, help= "input file"),
+   ]]
+
+   optParser.set_usage("%prog --query")
+
+   opts, args= optParser.parse_args()
+   if opts.file == stdin:
+      setattr(opts, "file", stdin.read())
+   else:
+      fh= open(opts.file, "r")
+      setattr(opts, "file", fh.read())
+      fh.close()
+      
+   return opts
+
 
 if __name__ == '__main__':
 
-   text= stdin.read()
-    
-   address= Address(text)
+   opts= parse_args(argv)
+
+   address= Address(opts.file)
    address.parse()
   
