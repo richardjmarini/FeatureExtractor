@@ -62,13 +62,19 @@ class Trainer(AddressClassifier):
 
    def information_gain(self, features, classifications, entropy):
 
+      print 
+      print "=" * 66
+      print "%20s %0.15f" % ("Entropy", entropy)
+      print "%20s %3s %3s  %17s %17s" % ("feature", "p", "n", "exp .entropy", "igain")
+      print "-" * 66
       igain= {}
       for feature in features:
          (p, n)= self.pnsplit(feature, classifications)
          expected_entropy= self.expected_entropy(p, n)
          igain[feature]= entropy - expected_entropy
 
-         print "%20s %3d %3d    %0.15f %0.15f, %0.15f" % (feature, p, n, entropy, expected_entropy, igain.get(feature))
+         print "%20s %3d %3d  %0.15f, %0.15f" % (feature, p, n, expected_entropy, igain.get(feature))
+
       return igain
 
    def train(self, input, output):
@@ -82,7 +88,7 @@ class Trainer(AddressClassifier):
          entropy= document.get("entropy")
          igain= self.information_gain(features, classifications, entropy)
         
-      print
+         print
  
 def parse_args(argv):
 
