@@ -7,6 +7,8 @@ from nltk import word_tokenize, pos_tag
 from json import loads, dumps
 from glob import glob
 from math import log
+from operator import itemgetter
+from pprint import pprint
 
 from featurebase import Token
 from address import AddressClassifier
@@ -58,21 +60,30 @@ class Trainer(AddressClassifier):
  
       return expected_entropy
 
+   def information_gain(self, features, classifications, entropy):
+
+      igain= {}
+      for feature in features:
+         (p, n)= self.pnsplit(feature, classifications)
+         expected_entropy= self.expected_entropy(p, n)
+         igain[feature]= entropy - expected_entropy
+
+         print "%20s %3d %3d    %0.15f %0.15f, %0.15f" % (feature, p, n, entropy, expected_entropy, igain.get(feature))
+      return igain
+
    def train(self, input, output):
  
-      print "%25s %15s %15s %15s %15s %15s" % ("feature", "p", "n", "entropy", "exp. entropy", "igain")
       for document in input:
+
          document= loads(document)
-         for feature in document.get("probabilities"):
 
-
-            (p, n)= self.pnsplit(feature, document.get('classifications'))
-            igain= document.get('entropy') - self.expected_entropy(p, n)
-
-            print "%25s %0.13f %0.13f %0.13f %0.13f %0.13f" % (feature, p, n, document.get('entropy'), self.expected_entropy(p, n), igain)
-         print
+         features= document.get("probabilities").keys()
+         classifications= document.get("classifications")
+         entropy= document.get("entropy")
+         igain= self.information_gain(features, classifications, entropy)
+        
+      print
  
-
 def parse_args(argv):
 
    optParser= OptionParser()
