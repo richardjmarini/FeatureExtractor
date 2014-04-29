@@ -45,27 +45,27 @@ class FeatureClassifier(object):
 
       super(FeatureClassifier, self).__init__()
 
-   def index(self, tokens):
-
-      # probability= occurences / total
-      # entropy(s)= sum( p(i)* log2(p(i)) )
+   def probabilities(self, tokens):
+      """probability= occurences / total"""
 
       features= [handler.feature for handler in Feature.handlers]
       total_features= float(len(features))
       token_features= list(chain(*[token.features for token in tokens]))
-      self.probability_matrix= dict([(feature, token_features.count(feature) / total_features) for feature in features])
+      self.probabilities= dict([(feature, token_features.count(feature) / total_features) for feature in features])
 
-      #print "Probability Matrix:"
-      #pprint(self.probability_matrix)
+      print "Probabilities:"
+      pprint(self.probabilities)
 
-      self.entropy= sum([probability * log(probability, 2) for probability in self.probability_matrix.values() if probability > 0])
+      return self.probabilities
 
-      #print "Entropy:", self.entropy
+   def entropy(self):
+      """entropy(s)= sum( p(i)* log2(p(i)) )"""
 
+      self.entropy= sum([probability * log(probability, 2) for probability in self.probabilities.values() if probability > 0])
 
-   def probability(self, feature):
+      print "Entropy:", self.entropy
 
-      return self.probability_matrix.get(feature, 0)
+      return self.entropy
 
    def add_features(self, token):
 
@@ -73,5 +73,3 @@ class FeatureClassifier(object):
          handler(self, token)
 
       return token.features
-
-

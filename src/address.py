@@ -2,15 +2,15 @@
 
 from optparse import OptionParser, make_option
 from sys import stdin, stdout, argv
-from os import path
+from os import path, curdir, pardir
 from re import match, sub
 from itertools import izip, chain
 from inspect import currentframe
 from nltk import word_tokenize, pos_tag
 from math import log
 from pprint import pprint
-from json import dumps
-
+from json import dumps, loads
+from glob import glob
 
 from featurebase import Feature, Token, FeatureClassifier
 
@@ -130,63 +130,3 @@ class AddressClassifier(FeatureClassifier):
 
       if len(sub("[^0-9]", "", token.word)) in (5, 9):
          return True
-
-class Trainer(AddressClassifier):
-
-   default_classification= ["OTHER"]
-
-   def __init__(self, text, output= stdout):
-
-      super(Trainer, self).__init__()
-
-      self.text= text
-      self.output= output
-      self.tokens= [Token(*word) for word in map(lambda word: list(word) + self.default_classification, pos_tag(word_tokenize(self.text)))]
-      map(self.add_features, self.tokens)
-
-      #print "Tokens:"
-      #pprint([(token.word, token.length, token.features) for token in self.tokens])
-
-      self.index(self.tokens)
-
-   def generate(self):
-
-      self.output.write(dumps([(token.word, token.features, token.classification) for token in trainer.tokens]))
-      self.output.flush()
-
-
-def parse_args(argv):
-
-   optParser= OptionParser()
-
-   [optParser.add_option(opt) for opt in [
-      make_option("-i", "--input", default= stdin, help= "input file"),
-      make_option("-o", "--output", default= stdout, help= "output file"),
-      make_option("-g", "--generate", action= "store_true", default= False, help= "generate training document"),
-   ]]
-
-   optParser.set_usage("%prog --query")
-
-   opts, args= optParser.parse_args()
-   if opts.input == stdin:
-      setattr(opts, "input", stdin.read())
-   else:
-      fh= open(opts.input, "r")
-      setattr(opts, "input", fh.read())
-      fh.close()
-
-   if opts.output != stdout:
-      setattr(opts, "output", open(opts.output, "w"))
-      
-   print ">>>>>>>>>>>", opts.generate
-   return opts
-
-
-if __name__ == '__main__':
-
-   opts= parse_args(argv)
-
-   trainer= Trainer(opts.input, opts.output)
-
-   if opts.generate:
-      trainer.generate()
