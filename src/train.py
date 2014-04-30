@@ -8,6 +8,7 @@ from json import loads, dumps
 from glob import glob
 from math import log
 from operator import itemgetter
+from itertools import chain
 from pprint import pprint
 
 from featurebase import Token
@@ -26,20 +27,16 @@ class Trainer(AddressClassifier):
       tokens= [Token(*word) for word in map(lambda word: list(word) + self.default_classification, pos_tag(word_tokenize(''.join(input))))]
       map(self.add_features, tokens)
 
-      document= {
-         'probabilities': self.probabilities(tokens),
-         'entropy': self.entropy(),
-         'classifications':  [(token.word, token.features, token.classification) for token in tokens]
-      }
-      
+      document= [(token.word, token.features, token.classification) for token in tokens]
+
       output.write(dumps(document))
       output.flush()
 
-   def pnsplit(self, feature, classifications):
+   def pnsplit(self, feature, data):
 
       p= 0
       n= 0
-      for (word, features, classification) in classifications:
+      for (word, features, classification) in data:
          if feature in features:
             p+= 1
          else:
@@ -60,7 +57,7 @@ class Trainer(AddressClassifier):
  
       return expected_entropy
 
-   def information_gain(self, features, classifications, entropy):
+   def information_gain(self, features, data, entropy):
 
       print 
       print "=" * 66
@@ -69,7 +66,7 @@ class Trainer(AddressClassifier):
       print "-" * 66
       igain= {}
       for feature in features:
-         (p, n)= self.pnsplit(feature, classifications)
+         (p, n)= self.pnsplit(feature, data)
          expected_entropy= self.expected_entropy(p, n)
          igain[feature]= entropy - expected_entropy
 
@@ -77,17 +74,30 @@ class Trainer(AddressClassifier):
 
       return igain
 
+
+   def entropy(self, features, data):
+
+      token_features= list(chain(*[_features for (word, _features, classification) in data]))
+
+      probabilities= dict([(feature, token_features.count(feature) / float(len(token_features))) for feature in features])
+      entropy= sum([-probability * log(probability, 2) for probability in probabilities.values() if probability > 0])
+     
+      return entropy
+ 
+
+   def build_tree(self, features, data):
+
+      entropy= self.entropy(features, data)
+      igain= self.information_gain(features, data, entropy)
+
    def train(self, input, output):
  
       for document in input:
 
-         document= loads(document)
+         data= loads(document)
+         features= set(chain(*[features for (word, features, classification) in data]))
+         self.build_tree(features, data)
 
-         features= document.get("probabilities").keys()
-         classifications= document.get("classifications")
-         entropy= document.get("entropy")
-         igain= self.information_gain(features, classifications, entropy)
-        
          print
  
 def parse_args(argv):
