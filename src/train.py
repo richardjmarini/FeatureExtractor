@@ -117,8 +117,8 @@ class Trainer(AddressClassifier):
 
          tree= self.build_tree(feature_list, data)
 
-         self.output.write(tree)
-         self.output.flush()
+         output.write(dumps(tree))
+         output.flush()
  
 def parse_args(argv):
 
