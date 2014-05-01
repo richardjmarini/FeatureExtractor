@@ -61,7 +61,13 @@ class Trainer(AddressClassifier):
 
       return g
 
-   def entropy(self, data, target= 'CLASS'):
+   def max_gain(self, feature_list, data, target= 'CLASS'):
+
+      feature= sorted([(feature, self.gain(feature, data)) for feature in feature_list if feature != 'CLASS'], key= itemgetter(1), reverse= True)[0][0]
+
+      return feature
+   
+   def frequency(self, data, target= 'CLASS'):
 
       freq= {}
       for (word, feature_dict) in data:
@@ -71,20 +77,18 @@ class Trainer(AddressClassifier):
          except KeyError:
             freq[cls]= 1
 
+      return freq
+
+   def entropy(self, data, target= 'CLASS'):
+
+      freq= self.frequency(data, target)
       h= sum([-freq / float(len(data)) * log(freq / float(len(data)), 2) for (cls, freq) in freq.iteritems()])
 
       return h
 
    def majority(self, data, target= 'CLASS'):
 
-      freq= {}
-      for (word, feature_dict) in data:
-         cls= feature_dict.get(target)
-         try:
-            freq[cls]+= 1
-         except KeyError:
-            freq[cls]= 1
-
+      freq= self.frequency(data, target)
       m= sorted(freq.iteritems(), key= itemgetter(1), reverse= True)[0][0]
 
       return m
@@ -98,9 +102,9 @@ class Trainer(AddressClassifier):
       if len(feature_list) == 0 or h == 0.0: 
          return {'ROOT': [self.majority(data)]}
 
-      (feature, igain)= sorted([(feature, self.gain(feature, data)) for feature in feature_list if feature != 'CLASS'], key= itemgetter(1), reverse= True)[0]
+      feature= self.max_gain(feature_list, data)
 
-      print 'largest gain', feature, igain
+      print 'largest gain', feature
 
       feature_list.pop(feature_list.index(feature))
 
