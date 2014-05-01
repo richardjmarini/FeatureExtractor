@@ -57,16 +57,10 @@ class Trainer(AddressClassifier):
 
       g= self.entropy(data) - h_subset
 
-      print 'gain', attribute, g
+      #print 'gain', attribute, g
 
       return g
 
-   def max_gain(self, feature_list, data, target= 'CLASS'):
-
-      feature= sorted([(feature, self.gain(feature, data)) for feature in feature_list if feature != 'CLASS'], key= itemgetter(1), reverse= True)[0][0]
-
-      return feature
-   
    def frequency(self, data, target= 'CLASS'):
 
       freq= {}
@@ -82,7 +76,8 @@ class Trainer(AddressClassifier):
    def entropy(self, data, target= 'CLASS'):
 
       freq= self.frequency(data, target)
-      h= sum([-freq / float(len(data)) * log(freq / float(len(data)), 2) for (cls, freq) in freq.iteritems()])
+      s= float(len(data))
+      h= sum([-(f / s) * log(f / s, 2) for (cls, f) in freq.iteritems()])
 
       return h
 
@@ -97,18 +92,24 @@ class Trainer(AddressClassifier):
 
       h= self.entropy(data)
 
-      print 'Entropy', h
+      #print 'Entropy', h
 
       if len(feature_list) == 0 or h == 0.0: 
-         return {'ROOT': [self.majority(data)]}
+         return self.majority(data)
 
-      feature= self.max_gain(feature_list, data)
+      feature= sorted([(f, self.gain(f, data)) for f in feature_list if f != 'CLASS'], key= itemgetter(1), reverse= True)[0][0]
 
-      print 'largest gain', feature
+      #print 'largest gain', feature
 
       feature_list.pop(feature_list.index(feature))
 
-      tree= {}
+      tree= {feature: {}}
+      for value in self.frequency(data, feature).keys():
+         data_subset= filter(lambda (word, feature_dict): feature_dict.get(feature) == value,  data)
+         branch= self.build_tree(feature_list, data_subset)
+         tree[feature][value]= branch
+
+      return tree
  
    def train(self, input, output):
  
