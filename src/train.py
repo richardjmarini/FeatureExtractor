@@ -9,7 +9,6 @@ from glob import glob
 from math import log
 from operator import itemgetter
 from itertools import chain, izip
-from pprint import pprint
 
 from featurebase import Token
 from address import AddressClassifier
@@ -57,8 +56,6 @@ class Trainer(AddressClassifier):
 
       g= self.entropy(data) - h_subset
 
-      #print 'gain', attribute, g
-
       return g
 
    def frequency(self, data, target= 'CLASS'):
@@ -92,21 +89,19 @@ class Trainer(AddressClassifier):
 
       h= self.entropy(data)
 
-      #print 'Entropy', h
-
-      if len(feature_list) == 0 or h == 0.0: 
+      if len(feature_list) - 1 == 0 or h == 0.0: 
          return self.majority(data)
 
       feature= sorted([(f, self.gain(f, data)) for f in feature_list if f != 'CLASS'], key= itemgetter(1), reverse= True)[0][0]
-
-      #print 'largest gain', feature
 
       feature_list.pop(feature_list.index(feature))
 
       tree= {feature: {}}
       for value in self.frequency(data, feature).keys():
+
          data_subset= filter(lambda (word, feature_dict): feature_dict.get(feature) == value,  data)
          branch= self.build_tree(feature_list, data_subset)
+
          tree[feature][value]= branch
 
       return tree
@@ -119,10 +114,11 @@ class Trainer(AddressClassifier):
           
          (word, feature_dict)= data[0]
          feature_list= feature_dict.keys()
-         tree= self.build_tree(feature_list, data)
-         print 'tree', tree
 
-         print
+         tree= self.build_tree(feature_list, data)
+
+         self.output.write(tree)
+         self.output.flush()
  
 def parse_args(argv):
 
