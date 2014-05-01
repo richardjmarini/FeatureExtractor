@@ -8,7 +8,7 @@ from json import loads, dumps
 from glob import glob
 from math import log
 from operator import itemgetter
-from itertools import chain
+from itertools import chain, izip
 from pprint import pprint
 
 from featurebase import Token
@@ -27,76 +27,95 @@ class Trainer(AddressClassifier):
       tokens= [Token(*word) for word in map(lambda word: list(word) + self.default_classification, pos_tag(word_tokenize(''.join(input))))]
       map(self.add_features, tokens)
 
-      document= [(token.word, token.features, token.classification) for token in tokens]
+      feature_list= list(chain(*[token.features for token in tokens]))
+
+      document= []
+      for token in tokens:
+         feature_dict= dict([(feature, False) for feature in feature_list])
+         feature_dict.update([(feature, True) for feature in token.features])
+         feature_dict.update([('POS', token.pos), ('CLASS', token.classification)])
+         document.append((token.word, feature_dict))
 
       output.write(dumps(document))
       output.flush()
 
-   def pnsplit(self, feature, data):
-
-      p= 0
-      n= 0
-      for (word, features, classification) in data:
-         if feature in features:
-            p+= 1
-         else:
-            n+= 1
-
-      return (p, n)
-
-   def expected_entropy(self, p, n):
-
-      total= p + n
-      pos= p / float(total)
-      neg= n / float(total)
-
-      if p == 0 or n == 0:
-         expected_entropy= 0.0
-      else:
-         expected_entropy= -pos * log(pos, 2) -  neg * log(neg, 2)
+   def gain(self, attribute, data, target= 'CLASS'):
  
-      return expected_entropy
+      freq= {}
+      h_subset= 0.0
 
-   def information_gain(self, features, data, entropy):
+      for (word, feature_dict) in data:
+         try:
+            freq[feature_dict[attribute]]+= 1
+         except KeyError:
+            freq[feature_dict[attribute]]= 1
 
-      print 
-      print "=" * 66
-      print "%20s %0.15f" % ("Entropy", entropy)
-      print "%20s %3s %3s  %17s %17s" % ("feature", "p", "n", "exp .entropy", "igain")
-      print "-" * 66
-      igain= {}
-      for feature in features:
-         (p, n)= self.pnsplit(feature, data)
-         expected_entropy= self.expected_entropy(p, n)
-         igain[feature]= entropy - expected_entropy
+      for v, f in freq.iteritems():
+         p= f / float(sum(freq.values()))
+         data_subset= [(word, feature_dict) for (word, feature_dict) in data if feature_dict[attribute] == v]
+         h_subset+= p * self.entropy(data_subset)
 
-         print "%20s %3d %3d  %0.15f, %0.15f" % (feature, p, n, expected_entropy, igain.get(feature))
+      g= self.entropy(data) - h_subset
 
-      return igain
+      print 'gain', attribute, g
 
+      return g
 
-   def entropy(self, features, data):
+   def entropy(self, data, target= 'CLASS'):
 
-      token_features= list(chain(*[_features for (word, _features, classification) in data]))
+      freq= {}
+      for (word, feature_dict) in data:
+         cls= feature_dict.get(target)
+         try:
+            freq[cls]+= 1
+         except KeyError:
+            freq[cls]= 1
 
-      probabilities= dict([(feature, token_features.count(feature) / float(len(token_features))) for feature in features])
-      entropy= sum([-probability * log(probability, 2) for probability in probabilities.values() if probability > 0])
-     
-      return entropy
+      h= sum([-freq / float(len(data)) * log(freq / float(len(data)), 2) for (cls, freq) in freq.iteritems()])
+
+      return h
+
+   def majority(self, data, target= 'CLASS'):
+
+      freq= {}
+      for (word, feature_dict) in data:
+         cls= feature_dict.get(target)
+         try:
+            freq[cls]+= 1
+         except KeyError:
+            freq[cls]= 1
+
+      m= sorted(freq.iteritems(), key= itemgetter(1), reverse= True)[0][0]
+
+      return m
+
+   def build_tree(self, feature_list, data):
+
+      h= self.entropy(data)
+
+      print 'Entropy', h
+
+      if len(feature_list) == 0 or h == 0.0: 
+         return {'ROOT': [self.majority(data)]}
+
+      (feature, igain)= sorted([(feature, self.gain(feature, data)) for feature in feature_list if feature != 'CLASS'], key= itemgetter(1), reverse= True)[0]
+
+      print 'largest gain', feature, igain
+
+      feature_list.pop(feature_list.index(feature))
+
+      tree= {}
  
-
-   def build_tree(self, features, data):
-
-      entropy= self.entropy(features, data)
-      igain= self.information_gain(features, data, entropy)
-
    def train(self, input, output):
  
       for document in input:
 
          data= loads(document)
-         features= set(chain(*[features for (word, features, classification) in data]))
-         self.build_tree(features, data)
+          
+         (word, feature_dict)= data[0]
+         feature_list= feature_dict.keys()
+         tree= self.build_tree(feature_list, data)
+         print 'tree', tree
 
          print
  

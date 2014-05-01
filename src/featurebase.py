@@ -10,7 +10,7 @@ class Token(object):
 
       self.word= word
       self.pos= pos
-      self.features= [pos]
+      self.features= []
       self.classification= classification
       self.length= len(word)
 
