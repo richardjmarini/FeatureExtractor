@@ -116,7 +116,7 @@ class Trainer(AddressClassifier):
          feature_list= feature_dict.keys()
 
          tree= self.build_tree(feature_list, data)
-
+         
          output.write(dumps(tree))
          output.flush()
  

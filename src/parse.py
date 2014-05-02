@@ -13,6 +13,7 @@ from featurebase import Token
 class Parser(AddressClassifier):
 
    default_classification= ["OTHER"]
+   tfdict= {True: 'True', False: 'False'}
 
    def __init__(self, input= stdin, output= stdout):
 
@@ -21,26 +22,29 @@ class Parser(AddressClassifier):
 
    def classify(self, token, feature_dict, feature_tree):
 
+      #print "feature tree", feature_tree
       for feature in feature_tree:
-         value= feature_dict[feature]
-         subtree= feature_tree[feature]
-         cls= subtree[value]
-
-         print "\t%s|||||%s|||||%s" % (value, subtree, subtree)
-         if type(cls) == dict:
-            cls= self.classify(token, feature_dict, cls)
-         else:
-            return cls
-      return cls
-
-
+         #print "feature", feature 
+         feature_value= feature_dict[feature]
+         #print "feature value", feature_value
+         node= feature_tree[feature]
+         #print "node", node
+         branch= node[self.tfdict.get(feature_value, feature_value)]
+         #print feature, feature_value, feature_tree
+         #print "node", node
+         #print "branch", branch
+         if type(branch) == dict:
+            return self.classify(token, feature_dict, branch)
+       
+      return branch
 
    def parse(self, feature_tree):
 
-      print feature_tree
+      #print feature_tree
 
       for document in self.input:
 
+         address= []
          tokens= [Token(*word) for word in pos_tag(word_tokenize(''.join(document)))]
          map(self.add_features, tokens)
 
@@ -51,13 +55,12 @@ class Parser(AddressClassifier):
             feature_dict.update([(feature, True) for feature in token.features])
             feature_dict.update([('POS', token.pos), ('CLASS', token.classification)])
 
-            print "-------------------------------------------------------------------"
-            print token.word
-            cls=  self.classify(token, feature_dict, feature_tree)
+            token.classification=  self.classify(token, feature_dict, feature_tree)
+            if token.classification in ('START', 'MIDDLE', 'END'):
+               address.append(token)
 
-
-         #print '>>>>', [(token.word, token.pos, token.classification, token.features) for token in tokens]
-         #tokens= [Token(*word) for word in map(lambda word: list(word) + self.default_classification, pos_tag(word_tokenize(''.join(document))))]
+         #if [token.classification for token in address].count('MIDDLE') <= 20:
+         print ' '.join([token.word for token in address])
 
 
 
