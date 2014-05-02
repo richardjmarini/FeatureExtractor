@@ -22,17 +22,10 @@ class Parser(AddressClassifier):
 
    def classify(self, token, feature_dict, feature_tree):
 
-      #print "feature tree", feature_tree
       for feature in feature_tree:
-         #print "feature", feature 
          feature_value= feature_dict[feature]
-         #print "feature value", feature_value
          node= feature_tree[feature]
-         #print "node", node
          branch= node[self.tfdict.get(feature_value, feature_value)]
-         #print feature, feature_value, feature_tree
-         #print "node", node
-         #print "branch", branch
          if type(branch) == dict:
             return self.classify(token, feature_dict, branch)
        
@@ -40,10 +33,9 @@ class Parser(AddressClassifier):
 
    def parse(self, feature_tree):
 
-      #print feature_tree
-
       for document in self.input:
 
+         print "======================================================================"
          address= []
          tokens= [Token(*word) for word in pos_tag(word_tokenize(''.join(document)))]
          map(self.add_features, tokens)
@@ -57,10 +49,18 @@ class Parser(AddressClassifier):
 
             token.classification=  self.classify(token, feature_dict, feature_tree)
             if token.classification in ('START', 'MIDDLE', 'END'):
+               print "%20s %20s" % (token.word, token.classification)
                address.append(token)
+               if token.classification == 'END': 
+                  break
 
-         #if [token.classification for token in address].count('MIDDLE') <= 20:
-         print ' '.join([token.word for token in address])
+         print
+         if [token.classification for token in address].count('MIDDLE') <= 20:
+            print ' '.join([token.word for token in address])
+         else:
+            print 'ERROR: could not determine address'
+         print "----------------------------------------------------------------------"
+
 
 
 
