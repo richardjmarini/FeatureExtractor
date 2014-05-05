@@ -109,14 +109,14 @@ class Trainer(AddressClassifier):
    def train(self, input, output):
  
       for document in input:
-         print document
+         
          data= loads(document)
           
          (word, feature_dict)= data[0]
          feature_list= feature_dict.keys()
 
          tree= self.build_tree(feature_list, data)
-         
+   
          output.write(dumps(tree, indent= 4))
          output.flush()
  

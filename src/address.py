@@ -73,17 +73,17 @@ class AddressClassifier(FeatureClassifier):
 
    @Feature("ALLDIGITS")
    def alldigits(self, token):
-      if match("^\d+$", token.word):
+      if match("^[0-9]+$", token.word):
          return True
 
    @Feature("CONTAINSDIGITS")
    def containsdigits(self, token):
-      if match("\d", token.word):
+      if match("[0-9]", token.word):
          return True
 
    @Feature("ACRONYM")
    def acronym(self, token):
-      if match("(([A-z]\.){2})+", token.word):
+      if match("[A-z]{2,3}\.", token.word):
          return True
 
    @Feature("SINGLEINITIAL")
@@ -93,7 +93,7 @@ class AddressClassifier(FeatureClassifier):
 
    @Feature("PHONE")
    def phone(self, token):
-      if match("^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$", token.word):
+      if match("^(\+[0-9]{1,2}\s)?\(?[0-9]{3}\)?[\s.-][0-9]{3}[\s.-][0-9]{4}$", token.word):
          return True
 
    @Feature("CONTAINSDASH")
@@ -108,7 +108,7 @@ class AddressClassifier(FeatureClassifier):
 
    @Feature("LOWERCASECHAR")
    def lowercasechar(self, token):
-      if match("^[a-z]$", token.word):
+      if match("^[a-z]+$", token.word):
          return True
 
    @Feature("INITCAP")
