@@ -2,7 +2,18 @@
 
 Feature extractor allows the developer to systematically assign feature attributes to tokens via the @Feature decorator.  These feature attributes tokens also have an associated output class which is manually trained..  The entropy of the feature matrix is calculated.  The information gain of each feature is calculated and a decision tree is generated.
 
-## Example
+#### Example documents used:
+```
+cat ../documents/sample[01].txt
+
+I live at 40 Stonecrest Ct. Staten Island, NY 10308. I hope you an visit sometime.
+I work at 17 Battery Pl. New York, NY 10004 which is located right across the street from Batery Park and right next to the Battery Tunnel.  I hope you can meet me for lunch sometime.
+
+cat ../documents/sample2.txt
+
+I live at 17 Battery Pl. New York, NY 10004
+```
+
 Lets say we wanted the ability to extract a postal address from plain text. First step is to create a classifier.  When methods are decorated with @Feature the user-defined feature passed to the decorator will be added to the token.features list if the method returns True.  
 
 ```
@@ -17,8 +28,9 @@ class AddressClassifier(FeatureClassifier):
 
 Once you've created your classifier the user can create a "training" document. By default a Part of Speach Tag "POS" and "CLASS" are added to the feature list for each token.
 
+
 ```
-cat ../documents/sample[0-9].txt | ./train.py --generate --output=../train/address.train
+cat ../documents/sample[01].txt | ./train.py --generate --output=../train/address.train
 
 [
     [
