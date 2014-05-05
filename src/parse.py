@@ -13,7 +13,7 @@ from featurebase import Token
 class Parser(AddressClassifier):
 
    default_classification= ["OTHER"]
-   tfdict= {True: 'True', False: 'False'}
+   tfdict= {True: 'true', False: 'false'}
 
    def __init__(self, input= stdin, output= stdout):
 
@@ -25,6 +25,7 @@ class Parser(AddressClassifier):
       for feature in feature_tree:
          feature_value= feature_dict[feature]
          node= feature_tree[feature]
+         
          branch= node[self.tfdict.get(feature_value, feature_value)]
          if type(branch) == dict:
             return self.classify(token, feature_dict, branch)
@@ -50,11 +51,9 @@ class Parser(AddressClassifier):
             token.classification=  self.classify(token, feature_dict, feature_tree)
             if token.classification in ('START', 'MIDDLE', 'END'):
                print "%20s %20s" % (token.word, token.classification)
-               address.append(token)
-               if token.classification == 'END': 
-                  break
 
-         print
+               address.append(token)
+
          if [token.classification for token in address].count('MIDDLE') <= 20:
             print ' '.join([token.word for token in address])
          else:

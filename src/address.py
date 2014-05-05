@@ -21,71 +21,6 @@ class AddressClassifier(FeatureClassifier):
       super(AddressClassifier, self).__init__()
       self.handlers= {}
 
-   @Feature("INITCAP")
-   def initcap(self, token):
-      if match("^[A-Z][a-z]+.*", token.word):
-         return True
-
-   @Feature("ALLCAPS")
-   def allcaps(self, token):
-      if match("^[A-Z]+$", token.word):
-         return True
-
-   @Feature("CONTAINSDIGITS")
-   def containsdigits(self, token):
-      if match("\d", token.word):
-         return True
-
-   @Feature("ALLDIGITS")
-   def alldigits(self, token):
-      if match("^\d+$", token.word):
-         return True
-
-   @Feature("ACRONYM")
-   def acronym(self, token):
-      if match("(([A-z]\.){2})+", token.word):
-         return True
-
-   @Feature("WORD")
-   def word(self, token):
-      if match("[A-z]+", token.word):
-         return True
-
-   @Feature("PUNCUATION")
-   def puncuation(self, token):
-      if match("[\.,!?;+'\(\)\"\[\]=_\-:#@]", token.word):
-         return True
-
-   @Feature("SINGLEINITIAL")
-   def singleinitial(self, token):
-      if match("^[A-z]\.$", token.word):
-         return True
-
-   @Feature("UPPERCASECHAR")
-   def uppsercasechar(self, token):
-      if match("^[A-Z]$", token.word):
-         return True
-
-   @Feature("LOWERCASECHAR")
-   def lowercasechar(self, token):
-      if match("^[a-z]$", token.word):
-         return True
-
-   @Feature("CONTAINSDASH")
-   def containsdash(self, token):
-      if match("\-", token.word):
-         return True
-
-   @Feature("PHONE")
-   def phone(self, token):
-      if match("^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$", token.word):
-         return True
-
-   @Feature("EMAIL")
-   def email(self, token):
-      if match("\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b", token.word):
-         return True
-
    @Feature("USSTATENAME")
    def usstatename(self, token):
 
@@ -120,7 +55,7 @@ class AddressClassifier(FeatureClassifier):
    @Feature("POBOX")
    def pobox(self, token):
 
-      postalboxes= {"PO": "P.O.", "PO BOX": "P.O. BOX"}
+      postalboxes= {"PO": "P.O.", "PO BOX": "P.O. BOX", "Post Office Box": "Post Office Box", "Box": "Box"}
 
       if sub("[^A-z]", "", token.word.lower()) in chain(*[(abbr.lower(), name.lower()) for abbr, name in postalboxes.iteritems()]):
          return True
@@ -129,4 +64,64 @@ class AddressClassifier(FeatureClassifier):
    def zipcode(self, token):
 
       if len(sub("[^0-9]", "", token.word)) in (5, 9):
+         return True
+
+   @Feature("ALLCAPS")
+   def allcaps(self, token):
+      if match("^[A-Z]+$", token.word):
+         return True
+
+   @Feature("ALLDIGITS")
+   def alldigits(self, token):
+      if match("^\d+$", token.word):
+         return True
+
+   @Feature("CONTAINSDIGITS")
+   def containsdigits(self, token):
+      if match("\d", token.word):
+         return True
+
+   @Feature("ACRONYM")
+   def acronym(self, token):
+      if match("(([A-z]\.){2})+", token.word):
+         return True
+
+   @Feature("SINGLEINITIAL")
+   def singleinitial(self, token):
+      if match("^[A-z]\.$", token.word):
+         return True
+
+   @Feature("PHONE")
+   def phone(self, token):
+      if match("^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$", token.word):
+         return True
+
+   @Feature("CONTAINSDASH")
+   def containsdash(self, token):
+      if match("\-", token.word):
+         return True
+
+   @Feature("EMAIL")
+   def email(self, token):
+      if match("\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b", token.word):
+         return True
+
+   @Feature("LOWERCASECHAR")
+   def lowercasechar(self, token):
+      if match("^[a-z]$", token.word):
+         return True
+
+   @Feature("INITCAP")
+   def initcap(self, token):
+      if match("^[A-Z][a-z]+.*", token.word):
+         return True
+
+   @Feature("PUNCUATION")
+   def puncuation(self, token):
+      if match("[\.,!?;+'\(\)\"\[\]=_\-:#@]", token.word):
+         return True
+
+   @Feature("WORD")
+   def word(self, token):
+      if match("[A-z]+", token.word):
          return True

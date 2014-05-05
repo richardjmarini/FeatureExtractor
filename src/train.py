@@ -35,7 +35,7 @@ class Trainer(AddressClassifier):
          feature_dict.update([('POS', token.pos), ('CLASS', token.classification)])
          document.append((token.word, feature_dict))
 
-      output.write(dumps(document))
+      output.write(dumps(document, indent=4))
       output.flush()
 
    def gain(self, attribute, data, target= 'CLASS'):
@@ -109,7 +109,7 @@ class Trainer(AddressClassifier):
    def train(self, input, output):
  
       for document in input:
-
+         print document
          data= loads(document)
           
          (word, feature_dict)= data[0]
@@ -117,7 +117,7 @@ class Trainer(AddressClassifier):
 
          tree= self.build_tree(feature_list, data)
          
-         output.write(dumps(tree))
+         output.write(dumps(tree, indent= 4))
          output.flush()
  
 def parse_args(argv):
