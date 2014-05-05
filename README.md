@@ -94,7 +94,12 @@ cat ../documents/sample3.txt | ./parse --feature=../trees/sample.tree
 ----------------------------------------------------------------------
 ```
 
+## Resources
+http://en.wikipedia.org/wiki/Entropy
 
+http://en.wikipedia.org/wiki/Information_gain_in_decision_trees
+
+http://en.wikipedia.org/wiki/Decision_tree
 
 
 
