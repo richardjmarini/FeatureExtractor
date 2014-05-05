@@ -30,7 +30,7 @@ Once you've created your classifier the user can create a "training" document. B
 
 
 ```
-cat ../documents/sample[01].txt | ./train.py --generate --output=../train/address.train
+cat ../documents/sample[01].txt | ./train.py --generate --output=../train/sample.train
 
 [
     [
@@ -64,7 +64,7 @@ OTHER: any token outside of the address block
 In this example, we'll open the training document and manually train it by manually adjusting the output CLASS parameters for the tokens in question.  Once the training document is completed the user can then generate the decision tree.
 
 ```
-./train.py --input=../train/address.train --output=../trees/address.tree
+./train.py --input=../train/address.train --output=../trees/sample.tree
 
 {
     "POS": {
@@ -79,7 +79,7 @@ In this example, we'll open the training document and manually train it by manua
 Once the decision tree is built.  We can now extract the address from a plain text document that had similar features to the training documents.
 
 ```
-cat ../documents/sample3.txt | ./parse
+cat ../documents/sample3.txt | ./parse --feature=../trees/sample.tree
 
 ======================================================================
                   17                START
