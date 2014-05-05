@@ -1,0 +1,882 @@
+[
+    [
+        "I", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "PRP", 
+            "ALLCAPS": true, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "live", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "VBP", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "at", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "IN", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "40", 
+        {
+            "WORD": false, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": true, 
+            "POS": "CD", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": true, 
+            "CLASS": "START", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "Stonecrest", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "NNP", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": true, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "MIDDLE", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "Ct.", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "NNP", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": true, 
+            "STREETSUFFIX": true, 
+            "ALLDIGITS": false, 
+            "CLASS": "MIDDLE", 
+            "USSTATENAME": true
+        }
+    ], 
+    [
+        "Staten", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "NNP", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": true, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "MIDDLE", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "Island", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "NNP", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": true, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "MIDDLE", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        ",", 
+        {
+            "WORD": false, 
+            "PUNCUATION": true, 
+            "CONTAINSDIGITS": false, 
+            "POS": ",", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "MIDDLE", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "NY", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "NNP", 
+            "ALLCAPS": true, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "MIDDLE", 
+            "USSTATENAME": true
+        }
+    ], 
+    [
+        "10308.", 
+        {
+            "WORD": false, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": true, 
+            "POS": "NNP", 
+            "ALLCAPS": false, 
+            "ZIPCODE": true, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "END", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "I", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "NNP", 
+            "ALLCAPS": true, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "hope", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "NN", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "you", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "PRP", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "an", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "DT", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "visit", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "NN", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "sometime.", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "NNP", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "I", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "PRP", 
+            "ALLCAPS": true, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "work", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "VBP", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "at", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "IN", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "17", 
+        {
+            "WORD": false, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": true, 
+            "POS": "CD", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": true, 
+            "CLASS": "START", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "Battery", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "NNP", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": true, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "MIDDLE",
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "Pl.", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "NNP", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": true, 
+            "STREETSUFFIX": true, 
+            "ALLDIGITS": false, 
+            "CLASS": "MIDDLE",
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "New", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "NNP", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": true, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "MIDDLE",
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "York", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "NNP", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": true, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "MIDDLE",
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        ",", 
+        {
+            "WORD": false, 
+            "PUNCUATION": true, 
+            "CONTAINSDIGITS": false, 
+            "POS": ",", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "MIDDLE",
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "NY", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "NNP", 
+            "ALLCAPS": true, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "MIDDLE",
+            "USSTATENAME": true
+        }
+    ], 
+    [
+        "10004", 
+        {
+            "WORD": false, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": true, 
+            "POS": "CD", 
+            "ALLCAPS": false, 
+            "ZIPCODE": true, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": true, 
+            "CLASS": "END", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "which", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "WDT", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "is", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "VBZ", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "located", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "VBN", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "right", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "RB", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "across", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "IN", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "the", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "DT", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "street", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "NN", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": true, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "from", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "IN", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "Batery", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "NNP", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": true, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "Park", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "NNP", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": true, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "and", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "CC", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "right", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "RB", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "next", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "JJ", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "to", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "TO", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "the", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "DT", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "Battery", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "NNP", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": true, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "Tunnel.", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "NNP", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": true, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "I", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "NNP", 
+            "ALLCAPS": true, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "hope", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "NN", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "you", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "PRP", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "can", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "MD", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "meet", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "VB", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "me", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "PRP", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": true
+        }
+    ], 
+    [
+        "for", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "IN", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "lunch", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "NN", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        "sometime", 
+        {
+            "WORD": true, 
+            "PUNCUATION": false, 
+            "CONTAINSDIGITS": false, 
+            "POS": "NN", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ], 
+    [
+        ".", 
+        {
+            "WORD": false, 
+            "PUNCUATION": true, 
+            "CONTAINSDIGITS": false, 
+            "POS": ".", 
+            "ALLCAPS": false, 
+            "ZIPCODE": false, 
+            "INITCAP": false, 
+            "STREETSUFFIX": false, 
+            "ALLDIGITS": false, 
+            "CLASS": "OTHER", 
+            "USSTATENAME": false
+        }
+    ]
+]

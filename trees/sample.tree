@@ -1,0 +1,63 @@
+{
+    "POS": {
+        "MD": "OTHER", 
+        "VB": "OTHER", 
+        "RB": "OTHER", 
+        "NN": "OTHER", 
+        "CC": "OTHER", 
+        "VBN": "OTHER", 
+        ",": "MIDDLE", 
+        "TO": "OTHER", 
+        "VBP": "OTHER", 
+        "WDT": "OTHER", 
+        "PRP": "OTHER", 
+        "JJ": "OTHER", 
+        "IN": "OTHER", 
+        "VBZ": "OTHER", 
+        "DT": "OTHER", 
+        "CD": {
+            "ZIPCODE": {
+                "false": "START", 
+                "true": "END"
+            }
+        }, 
+        ".": "OTHER", 
+        "NNP": {
+            "WORD": {
+                "false": "END", 
+                "true": {
+                    "USSTATENAME": {
+                        "false": {
+                            "INITCAP": {
+                                "false": "OTHER", 
+                                "true": {
+                                    "STREETSUFFIX": {
+                                        "false": {
+                                            "ALLDIGITS": {
+                                                "false": {
+                                                    "CONTAINSDIGITS": {
+                                                        "false": {
+                                                            "ALLCAPS": {
+                                                                "false": {
+                                                                    "PUNCUATION": {
+                                                                        "false": "MIDDLE"
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }, 
+                                        "true": "MIDDLE"
+                                    }
+                                }
+                            }
+                        }, 
+                        "true": "MIDDLE"
+                    }
+                }
+            }
+        }
+    }
+}
