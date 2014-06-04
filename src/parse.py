@@ -43,6 +43,8 @@ class Parser(AddressClassifier):
          map(self.add_features, tokens)
 
          feature_list= list(chain(*[token.features for token in tokens]))
+
+         last_token_classification= 'OTHER'
          for token in tokens:
 
             feature_dict= dict([(feature, False) for feature in feature_list])
@@ -50,18 +52,28 @@ class Parser(AddressClassifier):
             feature_dict.update([('POS', token.pos), ('CLASS', token.classification)])
 
             token.classification=  self.classify(token, feature_dict, feature_tree)
-            if token.classification in ('START', 'MIDDLE', 'END'):
+  
+            if token.classification  == 'START' and len(address) == 0:
+               address= []
                print "%20s %20s" % (token.word, token.classification)
-
                address.append(token)
 
-         if [token.classification for token in address].count('MIDDLE') <= 20:
-            print ' '.join([token.word for token in address])
-         else:
-            print 'ERROR: could not determine address'
-         print "----------------------------------------------------------------------"
+            elif token.classification == 'MIDDLE' and last_token_classification in ('START', 'MIDDLE') and len(address) and address[0].classification == 'START':
+               print "%20s %20s" % (token.word, token.classification)
+               address.append(token)
 
+            elif token.classification == 'END' and last_token_classification == 'MIDDLE':
+               print "%20s %20s" % (token.word, token.classification)
+               address.append(token)
 
+               if [token.classification for token in address].count('MIDDLE') <= 20:
+                  print
+                  print ' '.join([token.word for token in address])
+                  print "----------------------------------------------------------------------"
+
+               address= []
+
+            last_token_classification= token.classification
 
 
 def parse_args(argv):

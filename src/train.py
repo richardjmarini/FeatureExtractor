@@ -55,7 +55,7 @@ class Trainer(AddressClassifier):
          h_subset+= p * self.entropy(data_subset)
 
       g= self.entropy(data) - h_subset
-
+      
       return g
 
    def frequency(self, data, target= 'CLASS'):
@@ -88,12 +88,11 @@ class Trainer(AddressClassifier):
    def build_tree(self, feature_list, data):
 
       h= self.entropy(data)
-
+      
       if len(feature_list) - 1 == 0 or h == 0.0: 
          return self.majority(data)
 
       feature= sorted([(f, self.gain(f, data)) for f in feature_list if f != 'CLASS'], key= itemgetter(1), reverse= True)[0][0]
-
       feature_list.pop(feature_list.index(feature))
 
       tree= {feature: {}}

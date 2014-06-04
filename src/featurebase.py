@@ -22,6 +22,10 @@ class Token(object):
       if feature in self.features:
          self.features.pop(feature)
 
+   def __repr__(self):
+      return repr((self.word, self.pos, self.classification))
+
+
 class Feature(object):
 
    handlers= []
