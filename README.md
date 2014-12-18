@@ -6,12 +6,12 @@ Feature extractor allows the developer to systematically assign feature attribut
 ```
 cat ../documents/sample[01].txt
 
-I live at 40 Stonecrest Ct. Staten Island, NY 10308. I hope you an visit sometime.
-I work at 17 Battery Pl. New York, NY 10004 which is located right across the street from Batery Park and right next to the Battery Tunnel.  I hope you can meet me for lunch sometime.
+I live at 39 Milford Ave. Staten Island, NY 10314. I hope you an visit sometime.
+I work at 44 Park Pl. New York, NY 10014 which is located right across the street from the Park and right next to the pizza place.  I hope you can meet me for lunch sometime.
 
 cat ../documents/sample2.txt
 
-I live at 17 Battery Pl. New York, NY 10004
+I live at 39 Milford Ave. Staten Island, NY 10314
 ```
 
 Lets say we wanted the ability to extract a postal address from plain text. First step is to create a classifier.  When methods are decorated with @Feature the user-defined feature passed to the decorator will be added to the token.features list if the method returns True.  
@@ -82,14 +82,14 @@ Once the decision tree is built.  We can now extract the address from a plain te
 cat ../documents/sample3.txt | ./parse --feature=../trees/sample.tree
 
 ======================================================================
-                  17                START
-             Battery               MIDDLE
+                  44                START
+             Milford               MIDDLE
                  Pl.               MIDDLE
-                 New               MIDDLE
-                York               MIDDLE
+              Staten               MIDDLE
+              Island               MIDDLE
                    ,               MIDDLE
                   NY               MIDDLE
-               10004                  END
+               10314                  END
 17 Battery Pl. New York , NY 10004
 ----------------------------------------------------------------------
 ```
